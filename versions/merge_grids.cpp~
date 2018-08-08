@@ -1,0 +1,99 @@
+
+
+/*
+   This program should run on any Linux system. 
+   Compiled with the GNU C++ compiler, then move
+   to the analyze_bdruns directory:
+
+       ~/analyze_bdruns/scripts>  g++ merge_grids.cpp -o merge_grids
+       ~/analyze_bdruns/scripts>  mv merge_grids ../
+
+   The most basic usage of the program is to specify
+   only the set of grids desired to be merged. This 
+   requires noting the group name, which contains one
+   or more runs, along with the run name. 
+
+       ~/analyze_bdruns>  ./merge_grids [group name] [run name]
+
+   Additional options control how the grids are 
+   merged, and if it is run as a cluster job or as
+   a local executable. Simply include the flag for
+   this with no arguments.  
+
+           -s      values: int 4, 5, ..., 100
+                   number of intermediate sections to be
+                   integrated by the master process
+
+           -p      values: int 2, ..., ??????
+                   number of processes to use, this will 
+                   result [n_procs]-1 slaves, and 1 master
+                   default: number of cpu cores
+
+           -j      if this flag is given, a batch job 
+                   will be created and executed to 
+                   perform the calculation
+
+*/
+
+
+#include<iostream>
+
+
+//void print_header(std::string 
+
+
+int main (int argc, char** argv)
+{
+  // parameters for the program
+  // may be given by user, discovered, etc.
+  int n_sections = 20;
+  int n_grids;
+  int n_procs = std::thread::hardware_concurrency();
+  int n_blocks;
+  int im;
+  int jm;
+  int km;
+  bool as_job = false;
+  std::string nm_group;
+  std::string nm_run;
+  std::string d_merge_home;
+  std::string d_run_home;
+  std::string d_header;
+
+  // values calculated by the program
+  int n_lines_grid;
+  int n_lines_block;
+  int n_grids_proc
+  char** grids_lists
+  std::string header;
+
+  // read command line arguments
+  d_merge_home = argv[0];
+  nm_group = argv[1];
+  nm_run = argv[2];
+  d_run_home = d_merge_home + "/runs/" + nm_group + '/' + nm_run;
+  d_header = d_run_home + ';
+
+  for (int i=3; i<argc; i++) {
+    if {argv[i] == '-s'} {
+      i++;
+      n_sections = static_cast<int>(argv[i]);
+    } else if {argv[i] == '-p'} {
+      i++;
+      n_procs = static_cast<int>(argv[i]);
+    } else if {argv[i] == '-j'} {
+      as_job = true;
+    } else if {argv[i] == '--print-header'} {
+      cout << get_grids_header(d_header);
+      return 0;
+    }
+
+  }
+  // go to directory for set of grids
+  // and generate the grids list
+  
+
+  // read header from first grid in 
+  // list to fill details of merger
+
+}
